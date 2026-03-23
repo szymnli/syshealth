@@ -4,8 +4,13 @@
 # Thresholds
 DISK_WARN=70
 DISK_CRITICAL=90
+
 MEMORY_WARN=80
 MEMORY_CRITICAL=95
+
+CPU_WARN=70
+CPU_CRITICAL=90
+
 LARGE_FILE_SIZE="+1G"
 
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
@@ -35,7 +40,10 @@ print_critical() {
 # Source all checks
 source "$SCRIPT_DIR/checks/disk.sh"
 source "$SCRIPT_DIR/checks/memory.sh"
+source "$SCRIPT_DIR/checks/cpu.sh"
+
 
 # Run all checks
 check_disk
 check_memory
+check_cpu

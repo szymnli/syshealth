@@ -41,9 +41,11 @@ print_critical() {
 source "$SCRIPT_DIR/checks/disk.sh"
 source "$SCRIPT_DIR/checks/memory.sh"
 source "$SCRIPT_DIR/checks/cpu.sh"
+source "$SCRIPT_DIR/checks/services.sh"
 
 
 # Run all checks
 check_disk
 check_memory
 check_cpu
+check_services

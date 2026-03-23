@@ -43,20 +43,36 @@ print_critical() {
     echo -e "\033[31m[CRITICAL]\033[0m $1"
 }
 
-# Source all checks
-source "$SCRIPT_DIR/checks/disk.sh"
-source "$SCRIPT_DIR/checks/memory.sh"
-source "$SCRIPT_DIR/checks/cpu.sh"
-source "$SCRIPT_DIR/checks/services.sh"
-source "$SCRIPT_DIR/checks/logins.sh"
-source "$SCRIPT_DIR/checks/zombies.sh"
-source "$SCRIPT_DIR/checks/large_files.sh"
+main() {
+    echo "======================================================================================"
+    echo " syshealth report"
+    echo " $(date '+%Y-%m-%d %H:%M:%S')"
+    echo " $(hostname)"
+    echo "======================================================================================"
 
-# Run all checks
-check_disk
-check_memory
-check_cpu
-check_services
-check_logins
-check_zombies
-check_large_files
+    # Source all checks
+    source "$SCRIPT_DIR/checks/disk.sh"
+    source "$SCRIPT_DIR/checks/memory.sh"
+    source "$SCRIPT_DIR/checks/cpu.sh"
+    source "$SCRIPT_DIR/checks/services.sh"
+    source "$SCRIPT_DIR/checks/logins.sh"
+    source "$SCRIPT_DIR/checks/zombies.sh"
+    source "$SCRIPT_DIR/checks/large_files.sh"
+
+    # Run all checks
+    check_disk
+    check_memory
+    check_cpu
+    check_services
+    check_logins
+    check_zombies
+    check_large_files
+
+    echo ""
+    echo "======================================================================================"
+    echo " Report saved to: $LOG_FILE"
+    echo "======================================================================================"
+}
+
+# Run with logging
+main | tee >(sed $'s/\033\\[[0-9;]*m//g' >> "$LOG_FILE")

@@ -17,6 +17,7 @@ ZOMBIE_WARN=1
 ZOMBIE_CRITICAL=5
 
 LARGE_FILE_SIZE="+1G"
+DIRS_TO_CHECK=("$HOME" "/var/log" "/tmp")
 
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 LOG_DIR="$SCRIPT_DIR/logs"
@@ -49,7 +50,7 @@ source "$SCRIPT_DIR/checks/cpu.sh"
 source "$SCRIPT_DIR/checks/services.sh"
 source "$SCRIPT_DIR/checks/logins.sh"
 source "$SCRIPT_DIR/checks/zombies.sh"
-
+source "$SCRIPT_DIR/checks/large_files.sh"
 
 # Run all checks
 check_disk
@@ -58,3 +59,4 @@ check_cpu
 check_services
 check_logins
 check_zombies
+check_large_files

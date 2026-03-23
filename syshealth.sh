@@ -6,7 +6,7 @@ DISK_WARN=70
 DISK_CRITICAL=90
 MEMORY_WARN=80
 MEMORY_CRITICAL=95
-LARGE_FILE_SIZE="+1G" 
+LARGE_FILE_SIZE="+1G"
 
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 LOG_DIR="$SCRIPT_DIR/logs"
@@ -34,6 +34,8 @@ print_critical() {
 
 # Source all checks
 source "$SCRIPT_DIR/checks/disk.sh"
+source "$SCRIPT_DIR/checks/memory.sh"
 
 # Run all checks
 check_disk
+check_memory

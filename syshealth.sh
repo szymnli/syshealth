@@ -11,6 +11,8 @@ MEMORY_CRITICAL=95
 CPU_WARN=70
 CPU_CRITICAL=90
 
+LOGIN_WARN=10
+
 LARGE_FILE_SIZE="+1G"
 
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
@@ -42,6 +44,7 @@ source "$SCRIPT_DIR/checks/disk.sh"
 source "$SCRIPT_DIR/checks/memory.sh"
 source "$SCRIPT_DIR/checks/cpu.sh"
 source "$SCRIPT_DIR/checks/services.sh"
+source "$SCRIPT_DIR/checks/logins.sh"
 
 
 # Run all checks
@@ -49,3 +52,4 @@ check_disk
 check_memory
 check_cpu
 check_services
+check_logins

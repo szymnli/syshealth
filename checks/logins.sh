@@ -8,12 +8,12 @@ check_logins() {
     elif [ "$failed_logins" -lt "$LOGIN_WARN" ]; then
         print_warn "$failed_logins failed logins today"
         echo "$failed_lines" | awk '{print $11}' | sort | uniq -c | sort -rn | while read -r count ip; do
-            echo "  $count attempts from $ip"
+            echo "  - $count attempts from $ip"
         done
     else
         print_critical "$failed_logins failed logins today"
         echo "$failed_lines" | awk '{print $11}' | sort | uniq -c | sort -rn | while read -r count ip; do
-            echo "  $count attempts from $ip"
+            echo "  - $count attempts from $ip"
         done
     fi
 }

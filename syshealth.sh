@@ -13,6 +13,9 @@ CPU_CRITICAL=90
 
 LOGIN_WARN=10
 
+ZOMBIE_WARN=1
+ZOMBIE_CRITICAL=5
+
 LARGE_FILE_SIZE="+1G"
 
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
@@ -45,6 +48,7 @@ source "$SCRIPT_DIR/checks/memory.sh"
 source "$SCRIPT_DIR/checks/cpu.sh"
 source "$SCRIPT_DIR/checks/services.sh"
 source "$SCRIPT_DIR/checks/logins.sh"
+source "$SCRIPT_DIR/checks/zombies.sh"
 
 
 # Run all checks
@@ -53,3 +57,4 @@ check_memory
 check_cpu
 check_services
 check_logins
+check_zombies

@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+
+# Thresholds
+DISK_WARN=70
+DISK_CRITICAL=90
+MEMORY_WARN=80
+MEMORY_CRITICAL=95
+LARGE_FILE_SIZE="+1G" 
+
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 LOG_DIR="$SCRIPT_DIR/logs"
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
@@ -23,3 +31,9 @@ print_warn() {
 print_critical() {
     echo -e "\033[31m[CRITICAL]\033[0m $1"
 }
+
+# Source all checks
+source "$SCRIPT_DIR/checks/disk.sh"
+
+# Run all checks
+check_disk
